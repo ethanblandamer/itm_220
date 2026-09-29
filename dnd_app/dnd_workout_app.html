@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D&amp;D Workout Quest</title>
+  <link rel="stylesheet" href="dnd_workout_app.css">
+  <script src="dnd_workout_app.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div><h1>D&amp;D Workout Quest</h1><p class="subtitle">Create your character, roll the dice, and complete your encounter.</p></div>
+      <div class="badge">Physical Dice Mode</div>
+    </header>
+
+    <section class="panel">
+      <h2>1. Create Your Character</h2>
+      <div class="form-grid">
+        <label>Character name<input id="characterName" placeholder="e.g. Arin the Brave" maxlength="60"></label>
+        <label>Class<select id="classSelect"></select></label>
+        <label>Level<input id="levelInput" type="number" min="1" max="10" value="1"></label>
+        <label>XP after workout<input id="xpInput" type="number" min="0" value="0"></label>
+      </div>
+      <div class="actions"><button class="secondary" id="saveBtn">Save Character</button></div>
+      <p class="note">Enter XP after finishing a workout, then save your character. The app does not roll dice and does not ask you to enter dice results.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Character Summary</h2>
+      <div class="summary">
+        <div class="stat"><small>Character</small><strong id="summaryName">—</strong></div>
+        <div class="stat"><small>Class</small><strong id="summaryClass">—</strong></div>
+        <div class="stat"><small>Level</small><strong id="summaryLevel">1</strong></div>
+        <div class="stat"><small>XP</small><strong id="summaryXp">0</strong></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>2. Physical Dice Workout Guide</h2>
+      <p class="note">Roll the dice yourself, then use this table to determine the workout. Change the character’s class or level and save to refresh the available exercise list.</p>
+      <div class="table-wrap">
+        <table class="dice-table">
+          <thead><tr><th>Die</th><th>Roll result</th><th>Controls</th><th>Workout result</th></tr></thead>
+          <tbody id="diceTableBody">
+            <tr><td>d20</td><td>1–5, 6–10, 11–15, 16–19, 20</td><td>Encounter difficulty</td><td>Easy, Standard, Difficult, Boss, or Critical success.</td></tr>
+            <tr><td>d12</td><td>1–12</td><td>Exercise selection</td><td>Use the matching exercise slot in the class exercise table below.</td></tr>
+            <tr><td>d10</td><td>1–2, 3–6, 7–9, 10</td><td>Rep style</td><td>Strength, Standard, Endurance, or Heroic effort.</td></tr>
+            <tr><td>d8</td><td>1–8</td><td>Rep adjustment</td><td>Add d8 − 1 to the rep style’s base range.</td></tr>
+            <tr><td>d6</td><td>1–6</td><td>Set count</td><td>Sets = 1 + CEILING(d6 ÷ 2), capped by level.</td></tr>
+            <tr><td>d4</td><td>1–4</td><td>Workout size</td><td>1–3 exercises; a 4 gives 4 exercises at level 5+.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="workout-header"><h2>3. Available Class Exercises</h2><div class="encounter" id="encounterText">Save your character to update this guide.</div></div>
+      <div class="table-wrap">
+        <table class="dice-table exercise-reference">
+          <thead><tr><th>Slot</th><th>Exercise</th><th>Unlock level</th><th>Status</th></tr></thead>
+          <tbody id="exerciseTableBody"></tbody>
+        </table>
+      </div>
+      <div class="message" id="message" role="status"></div>
+    </section>
+
+    <footer>Safety first: warm up, use controlled form, scale the workout to your ability, and stop for sharp pain. Strength rest: 90–150 seconds; standard: 60–90 seconds; endurance: 30–60 seconds.</footer>
+  </main>
+</body>
+</html>
